@@ -1,0 +1,70 @@
+a ,a:hover,a:visited{
+	color: #690;
+}
+
+body {
+	background: #46483e;
+	color: #d2d8ba;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	font-size: 14px;
+}
+
+.dbBox {
+	width: 25em;
+	background: rgba(51,52,45,.5);
+	padding: 1em 2em;
+	margin-bottom: 3em;
+	height: 100%;
+	display: table-cell;
+}
+
+#nav {
+	position: fixed;
+	top: 30%;
+	list-style-type: none;
+	background: rgba(51,52,45,.5);
+	margin: 0em 0em;
+	padding: 1em 1em;
+}
+
+.section {
+	width: 68em;
+	margin: 3em auto;
+	display: table;
+	clear: both;
+	overflow: hidden;
+	border-spacing: 3em 0em;
+}
+
+.ribbon {
+	background-color: #a00;
+	overflow: hidden;
+	/* top left corner */
+	position: absolute;
+	right: -3em;
+	top: 2.5em;
+	/* 45 deg cw rotation */
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	/* shadow */
+	-moz-box-shadow: 0 0 1em #888;
+	-webkit-box-shadow: 0 0 1em #888;
+	-ms-box-shadow: 0 0 1em #888;
+	-o-box-shadow: 0 0 1em #888;
+	box-shadow: 0 0 1em #888;
+}
+.ribbon a {
+	border: 1px solid #faa;
+	color: #fff;
+	display: block;
+	font: bold 81.25% 'Helvetiva Neue', Helvetica, Arial, sans-serif;
+	margin: 0.05em 0 0.075em 0;
+	padding: 0.5em 3.5em;
+	text-align: center;
+	text-decoration: none;
+	/* shadow */
+	text-shadow: 0 0 0.5em #444;
+}

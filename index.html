@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>NoSQL Information and Comparison</title>
+		<meta charset="utf8" />
+		<link rel="stylesheet" href="style.css" />
+		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="fancystuff.js"></script>
+	</head>
+	<body>
+		<div class="ribbon">
+			<a href="https://github.com/Daegalus/NoSQL-Comparison">Fork me on GitHub</a>
+		</div>
+		
+		<div>
+			<ul id="nav" class="nav">
+				<li><a href="#couchdb">CouchDB</a></li>
+				<li><a href="#redis">Redis</a></li>
+				<li><a href="#mongodb">MongoDB</a></li>
+				<li><a href="#riak">Riak</a></li>
+				<li><a href="#membase">Membase</a></li>
+				<li><a href="#neo4j">Neo4j</a></li>
+				<li><a href="#cassandra">Cassandra</a></li>
+				<li><a href="#hbase">HBase</a></li>
+				<li>---</li>
+				<li><a href="#info">Info</a></li>
+				<li><a href="#credits">Credits</a></li>
+			</ul>
+		</div>
+		
+		<div class="section">
+			<div id="couchdb" class="dbBox">
+				<h2>CouchDB (v1.1.1)</h2>
+				<ul>
+					<li><strong>Written In:</strong> Erlang</li>
+					<li><strong>Main point:</strong> DB consistency, ease of use</li>
+					<li><strong>License:</strong> Apache</li>
+					<li><strong>Protocol:</strong> HTTP/REST</li>
+					<li>Bi-directional (!) replication,</li>
+					<li>continuous or ad-hoc,</li>
+					<li>with conflict detection,</li>
+					<li>thus, master-master replication. (!)</li>
+					<li>MVCC - write operations do not block reads</li>
+					<li>Previous versions of documents are available</li>
+					<li>Crash-only (reliable) design</li>
+					<li>Needs compacting from time to time</li>
+					<li>Views: embedded map/reduce</li>
+					<li>Formatting views: lists & shows</li>
+					<li>Server-side document validation possible</li>
+					<li>Authentication possible</li>
+					<li>Real-time updates via _changes (!)</li>
+					<li>Attachment handling</li>
+					<li>thus, CouchApps (standalone js apps)</li>
+					<li>jQuery library included</li>
+				</ul>
+				<strong>Best used:</strong> For accumulating, occasionally changing data, on which pre-defined queries are to be run. Places where versioning is important.<br /><br />
+				<strong>For example:</strong> CRM, CMS systems. Master-master replication is an especially interesting feature, allowing easy multi-site deployments.
+			</div>
+			<div id="redis" class="dbBox">
+			<h2>Redis (v2.4)</h2>
+			<ul>
+				<li><strong>Written In:</strong> C/C++</li>
+				<li><strong>Main point:</strong> Blazing fast</li>
+				<li><strong>License:</strong> BSD</li>
+				<li><strong>Protocol:</strong> Telnet-like</li>
+				<li>Disk-backed in-memory database,</li>
+				<li>Currently without disk-swap (VM and Diskstore were abandoned)</li>
+				<li>Master-slave replication</li>
+				<li>Simple values or hash tables by keys, but complex operations like ZREVRANGEBYSCORE.</li>
+				<li>INCR & co (good for rate limiting or statistics)</li>
+				<li>Has sets (also union/diff/inter)</li>
+				<li>Has lists (also a queue; blocking pop)</li>
+				<li>Has hashes (objects of multiple fields)</li>
+				<li>Sorted sets (high score table, good for range queries)</li>
+				<li>Redis has transactions (!)</li>
+				<li>Values can be set to expire (as in a cache)</li>
+				<li>Pub/Sub lets one implement messaging (!)</li>
+			</ul>
+			<strong>Best used:</strong> For rapidly changing data with a foreseeable database size (should fit mostly in memory).
+			<br /><br />
+			<strong>For example:</strong> Stock prices. Analytics. Real-time data collection. Real-time communication.
+			</div>
+		</div>
+		<div class="section">
+			<div id="mongodb" class="dbBox">
+				<h2>MongoDB</h2>
+				<ul>
+					<li><strong>Written In:</strong> C++</li>
+					<li><strong>Main point:</strong> Retains some friendly properties of SQL. (Query, index)</li>
+					<li><strong>License:</strong> AGPL (Drivers: Apache)</li>
+					<li><strong>Protocol:</strong> Custom, binary (BSON)</li>
+					<li>Master/slave replication (auto failover with replica sets)</li>
+					<li>Sharding built-in</li>
+					<li>Queries are javascript expressions</li>
+					<li>Run arbitrary javascript functions server-side</li>
+					<li>Better update-in-place than CouchDB</li>
+					<li>Uses memory mapped files for data storage</li>
+					<li>Performance over features</li>
+					<li>Journaling (with --journal) is best turned on</li>
+					<li>On 32bit systems, limited to ~2.5Gb</li>
+					<li>An empty database takes up 192Mb</li>
+					<li>GridFS to store big data + metadata (not actually an FS)</li>
+					<li>Has geospatial indexing</li>
+				</ul>
+				<strong>Best used:</strong> If you need dynamic queries. If you prefer to define indexes, not map/reduce functions. If you need good performance on a big DB. If you wanted CouchDB, but your data changes too much, filling up disks.
+				<br /><br />
+				<strong>For example:</strong> For most things that you would do with MySQL or PostgreSQL, but having predefined columns really holds you back.
+			</div>
+			<div id="riak" class="dbBox">
+				<h2>Riak (v1.0)</h2>
+				<ul>
+					<li><strong>Written In:</strong> Erlang & C, some Javascript</li>
+					<li><strong>Main point:</strong> Fault tolerance</li>
+					<li><strong>License:</strong> Apache</li>
+					<li><strong>Protocol:</strong> HTTP/REST or custom binary</li>
+					<li>Tunable trade-offs for distribution and replication (N, R, W)</li>
+					<li>Pre- and post-commit hooks in JavaScript or Erlang, for validation and security.</li>
+					<li>Map/reduce in JavaScript or Erlang</li>
+					<li>Links & link walking: use it as a graph database</li>
+					<li>Secondary indices: search in metadata</li>
+					<li>Large object support (Luwak)</li>
+					<li>Comes in "open source" and "enterprise" editions</li>
+					<li>Full-text search, indexing, querying with Riak Search server (beta)</li>
+					<li>In the process of migrating the storing backend from "Bitcask" to Google's "LevelDB"</li>
+					<li>Masterless multi-site replication replication and SNMP monitoring are commercially Licensed</li>
+				</ul>
+				<strong>Best used:</strong> If you want something Cassandra-like (Dynamo-like), but no way you're gonna deal with the bloat and complexity. If you need very good single-site scalability, availability and fault-tolerance, but you're ready to pay for multi-site replication.
+				<br /><br />
+				<strong>For example:</strong> Point-of-sales data collection. Factory control systems. Places where even seconds of downtime hurt. Could be used as a well-update-able web server.
+			</div>
+		</div>
+		<div class="section">
+			<div id="membase" class="dbBox">
+				<h2>Membase</h2>
+				<ul>
+					<li><strong>Written In:</strong> Erlang & C</li>
+					<li><strong>Main point:</strong> Memcache compatible, but with persistence and clustering</li>
+					<li><strong>License:</strong> Apache 2.0</li>
+					<li><strong>Protocol:</strong> memcached plus extensions</li>
+					<li>Very fast (200k+/sec) access of data by key</li>
+					<li>Persistence to disk</li>
+					<li>All nodes are identical (master-master replication)</li>
+					<li>Provides memcached-style in-memory caching buckets, too</li>
+					<li>Write de-duplication to reduce IO</li>
+					<li>Very nice cluster-management web GUI</li>
+					<li>Software upgrades without taking the DB offline</li>
+					<li>Connection proxy for connection pooling and multiplexing (Moxi)</li>
+				</ul>
+				<strong>Best used:</strong> Any application where low-latency data access, high concurrency support and high availability is a requirement.
+				<br /><br />
+				<strong>For example:</strong> Low-latency use-cases like ad targeting or highly-concurrent web apps like online gaming (e.g. Zynga).
+			</div>
+			<div id="neo4j" class="dbBox">
+				<h2>Neo4j (v1.5M02)</h2>
+				<ul>
+					<li><strong>Written In:</strong> Java</li>
+					<li><strong>Main point:</strong> Graph database - connected data</li>
+					<li><strong>License:</strong> GPL, some features AGPL/commercial</li>
+					<li><strong>Protocol:</strong> HTTP/REST (or embedding in Java)</li>
+					<li>Standalone, or embeddable into Java applications</li>
+					<li>Full ACID conformity (including durable data)</li>
+					<li>Both nodes and relationships can have metadata</li>
+					<li>Integrated pattern-matching-based query language ("Cypher")</li>
+					<li>Also the "Gremlin" graph traversal language can be used</li>
+					<li>Indexing of nodes and relationships</li>
+					<li>Nice self-contained web admin</li>
+					<li>Advanced path-finding with multiple algorithms</li>
+					<li>Indexing of keys and relationships</li>
+					<li>Optimized for reads</li>
+					<li>Has transactions (in the Java API)</li>
+					<li>Scriptable in Groovy</li>
+					<li>Online backup, advanced monitoring and High Availability is AGPL/commercial Licensed</li>
+				</ul>
+				<strong>Best used:</strong> For graph-style, rich or complex, interconnected data. Neo4j is quite different from the others in this sense.
+				<br /><br />
+				<strong>For example:</strong> Social relations, public transport links, road maps, network topologies.
+			</div>
+		</div>
+		
+		<div class="section">
+			<div id="cassandra" class="dbBox">
+				<h2>Cassandra</h2>
+				<ul>
+					<li><strong>Written In:</strong> Java</li>
+					<li><strong>Main point:</strong> Best of BigTable and Dynamo</li>
+					<li><strong>License:</strong> Apache</li>
+					<li><strong>Protocol:</strong> Custom, binary (Thrift)</li>
+					<li>Tunable trade-offs for distribution and replication (N, R, W)</li>
+					<li>Querying by column, range of keys</li>
+					<li>BigTable-like features: columns, column families</li>
+					<li>Has secondary indices</li>
+					<li>Writes are much faster than reads (!)</li>
+					<li>Map/reduce possible with Apache Hadoop</li>
+					<li>I admit being a bit biased against it, because of the bloat and complexity it has partly because of Java (configuration, seeing exceptions, etc)</li>
+				</ul>
+				<strong>Best used:</strong> When you write more than you read (logging). If every component of the system must be in Java. ("No one gets fired for choosing Apache's stuff.")
+				<br /><br />
+				<strong>For example:</strong> Banking, financial industry (though not necessarily for financial transactions, but these industries are much bigger than that.) Writes are faster than reads, so one natural niche is real time data analysis.
+			</div>
+			<div id="hbase" class="dbBox">
+				<h2>HBase</h2>
+				(With the help of ghshephard)
+				<ul>
+					<li><strong>Written In:</strong> Java</li>
+					<li><strong>Main point:</strong> Billions of rows X millions of columns</li>
+					<li><strong>License:</strong> Apache</li>
+					<li><strong>Protocol:</strong> HTTP/REST (also Thrift)</li>
+					<li>Modeled after BigTable</li>
+					<li>Map/reduce with Hadoop</li>
+					<li>Query predicate push down via server side scan and get filters</li>
+					<li>Optimizations for real time queries</li>
+					<li>A high performance Thrift gateway</li>
+					<li>HTTP supports XML, Protobuf, and binary</li>
+					<li>Cascading, hive, and pig source and sink modules</li>
+					<li>Jruby-based (JIRB) shell</li>
+					<li>No single point of failure</li>
+					<li>Rolling restart for configuration changes and minor upgrades</li>
+					<li>Random access performance is like MySQL</li>
+				</ul>
+				<strong>Best used:</strong> If you're in love with BigTable. :) And when you need random, realtime read/write access to your Big Data.
+				<br /><br />
+				<strong>For example:</strong> Facebook Messaging Database (more general example coming soon)
+			</div>
+		</div>
+		
+		<div class="section">
+			<div id="info" class="dbBox">
+				<h2>Info</h2>
+				I take no credit for writing most of this. Kristóf Kovács wrote the original version on his website linked in the credits. With how these software solutions are constantly updated, new databases coming out, I felt like it would be appropriate to create it as a github page so that anyone can update it with new versions and info by just forking it and then merging back.<br /><br />
+				
+				If you wish to add a NoSQL database, change anything, add new features, or update something for a version, just do a pull request on GitHub, make the changes, and do a merge request. This is the goal of making it a github project.
+			</div>
+			<div id="credits" class="dbBox">
+				<h2>Credits</h2>
+				Kristóf Kovács - <a href="http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis">Original Comparison</a><br />
+				Node.js - I stole your sites colors (<a href="http://www.nodejs.org">nodejs.org</a>).
+			</div>
+		</div>
+	</body>
+</html>
